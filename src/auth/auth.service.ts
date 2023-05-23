@@ -19,13 +19,18 @@ export class AuthService {
 
     const hashedPassword = await hash(password, 10);
 
-    await this.prisma.user.create({
-      data: {
-        email,
-        username,
-        password: hashedPassword,
-      },
-    });
+    try {
+      await this.prisma.user.create({
+        data: {
+          email,
+          username,
+          password: hashedPassword,
+        },
+      });
+
+    } catch (e) {
+      throw new HttpException('User with that email already exists', 400);
+    }
 
     return {
       message: 'User created successfully',
