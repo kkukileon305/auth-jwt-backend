@@ -27,7 +27,6 @@ export class AuthService {
           password: hashedPassword,
         },
       });
-
     } catch (e) {
       throw new HttpException('User with that email already exists', 400);
     }
