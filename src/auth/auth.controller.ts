@@ -18,7 +18,7 @@ import { RefreshTokenGuard } from './guards/RefreshToken.guard';
 import { AccessTokenGuard } from './guards/AccessToken.guard';
 
 @Controller('/api/auth')
-@ApiTags('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -61,7 +61,7 @@ export class AuthController {
 
   @ApiBearerAuth()
   @UseGuards(AccessTokenGuard)
-  @Post('me')
+  @Post('profile')
   async me(@Req() req: Request) {
     return this.authService.getMe(req.user.userId);
   }
